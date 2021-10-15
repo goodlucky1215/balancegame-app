@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.inflate
+import android.widget.ArrayAdapter
 import android.widget.LinearLayout
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatViewInflater
 import com.example.balancegame.adapter.CatalogListAdapter
 import com.example.balancegame.dao.CatalogDto
@@ -22,9 +24,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val catalogListView = ArrayAdapter(this, R.id.catalogListView)
         val catalogAdapter = CatalogListAdapter(this,catalogList)
-        val cataloglistview
-        cataloglistview.adapter = catalogAdapter
+        //catalogListView.ap = catalogAdapter
     }
 }
