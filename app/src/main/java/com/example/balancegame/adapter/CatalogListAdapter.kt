@@ -13,7 +13,7 @@ import com.example.balancegame.dao.CatalogDto
 class CatalogListAdapter(val context: Context, val catalogList: ArrayList<CatalogDto>) : BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         /* LayoutInflater는 item을 Adapter에서 사용할 View로 부풀려주는(inflate) 역할을 한다. */
-        val view: View = LayoutInflater.from(context).inflate(R.layout.activity_main,null)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.catalog_item,null)
         /* 위에서 생성된 view를 R.layout.activity_main.xml 파일의 각 View와 연결하는 과정이다. */
         val catalogName = view.findViewById<TextView>(R.id.catalog_name)
 
