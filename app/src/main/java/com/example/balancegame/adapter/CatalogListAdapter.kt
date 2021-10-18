@@ -3,12 +3,11 @@ package com.example.balancegame.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.balancegame.R
-import com.example.balancegame.dao.CatalogDto
+import com.example.balancegame.model.CatalogDto
 
 class CatalogListAdapter(val context: Context, val catalogList: ArrayList<CatalogDto>) : BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -20,7 +19,7 @@ class CatalogListAdapter(val context: Context, val catalogList: ArrayList<Catalo
         //가져온 데이터를 하나씩 불러옴.
         val list = catalogList[position]
 
-        catalogName.text = list.catalog_name
+        catalogName.text = list.catalogName
         return view
     }
 
