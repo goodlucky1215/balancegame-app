@@ -1,38 +1,45 @@
 package com.example.balancegame.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.TextView
-import com.example.balancegame.R
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.example.balancegame.databinding.CatalogItemBinding
 import com.example.balancegame.model.CatalogDto
 
-class CatalogListAdapter(val context: Context, val catalogList: ArrayList<CatalogDto>) : BaseAdapter() {
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        /* LayoutInflater는 item을 Adapter에서 사용할 View로 부풀려주는(inflate) 역할을 한다. */
-        val view: View = LayoutInflater.from(context).inflate(R.layout.catalog_item,null)
-        /* 위에서 생성된 view를 R.layout.activity_main.xml 파일의 각 View와 연결하는 과정이다. */
-        val catalogName = view.findViewById<TextView>(R.id.catalog_name)
+class CatalogListAdapter(val balanceGameStartClickListener: (CatalogDto) -> Unit ): ListAdapter<CatalogDto,CatalogListAdapter.CatalogListHolder>(diffUtil) {
+    inner class CatalogListHolder(private val binding: CatalogItemBinding): RecyclerView.ViewHolder(binding.root){
+        //Items를 itemsModel이라는 이름으로 받아온다.
+        fun bind(catalogdto: CatalogDto){
+            binding.catalogName.text  = catalogdto.catalogName
 
-        //가져온 데이터를 하나씩 불러옴.
-        val list = catalogList[position]
-
-        catalogName.text = list.catalogName
-        return view
+            binding.root.setOnClickListener {
+                balanceGameStartClickListener(catalogdto)
+            }
+        }
     }
 
-    override fun getItem(position: Int): Any {
-        return catalogList[position]
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogListHolder {
+
+        return CatalogListHolder(CatalogItemBinding.inflate(LayoutInflater.from(parent.context), parent,false))
     }
 
-    override fun getItemId(position: Int): Long {
-       return 0
+    override fun onBindViewHolder(holder: CatalogListHolder, position: Int) {
+        holder.bind(currentList[position])
     }
 
-    override fun getCount(): Int {
-        return catalogList.size
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<CatalogDto>(){
+            override fun areItemsTheSame(oldItem: CatalogDto, newItem: CatalogDto): Boolean {
+                return oldItem==newItem
+            }
+
+            override fun areContentsTheSame(oldItem: CatalogDto, newItem: CatalogDto): Boolean {
+                return oldItem.catalogId==newItem.catalogId
+            }
+
+        }
     }
 
 }
