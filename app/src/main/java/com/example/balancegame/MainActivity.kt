@@ -1,5 +1,6 @@
 package com.example.balancegame
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -48,10 +49,6 @@ class MainActivity : AppCompatActivity() {
         //4.어댑터에서 뷰로 카테고리 목록을 전부 가져옴
         initBalanceListRecyclerView()
 
-        //누르면 게임이 시작되도록 클릭이벤트
-        //catalogListView.setOnItemClickListener { parent, view, position, id ->
-        //     Toast.makeText(this, catalogList[position].catalogName, Toast.LENGTH_SHORT).show()
-        //}
     }
 
     private fun initCatalogListAdapter() {
@@ -59,7 +56,9 @@ class MainActivity : AppCompatActivity() {
         catalogListAdapter = CatalogListAdapter(balanceGameStartClickListener = {
             //여기에 게임 접속 화면을 연결하면 됨***////////////////////
             Toast.makeText(this, " 게임번호 : "+it.catalogId.toString()+", 게임이름 : "+it.catalogName, Toast.LENGTH_SHORT).show()
-            
+            val intent = Intent(this, GameActivity::class.java)
+                .putExtra("catalogId",it.catalogId.toString())
+            startActivity(intent)
         })
         mainActivityBinding.catalogRecyclerView.layoutManager = LinearLayoutManager(this)
         mainActivityBinding.catalogRecyclerView.adapter = catalogListAdapter
