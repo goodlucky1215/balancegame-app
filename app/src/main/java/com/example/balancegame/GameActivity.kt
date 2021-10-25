@@ -17,20 +17,35 @@ class GameActivity : AppCompatActivity() {
 
     val questionList = arrayOf(
         arrayOf("3","3","#"),
-        arrayOf("3","3","#")
+        arrayOf("4","4","*")
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        //화면 가져오기
         gameActivityBinding = ActivityGameBinding.inflate(layoutInflater)
+        setContentView(gameActivityBinding.root)
 
         //questionDownload(intent.getStringExtra("catalogId"))
-        val questionNum = 0
+        var questionNum : Int = 0
         gameActivityBinding.questionTextView.text = questionList[questionNum][0]
         gameActivityBinding.choiceButtonA.text = questionList[questionNum][1]
-        gameActivityBinding.choiceButtonB.text = "45345345"
-        //Toast.makeText(this, questionList[0][0]+" "+questionList[0][1]+" "+questionList[0][2], Toast.LENGTH_SHORT).show()
+        gameActivityBinding.choiceButtonB.text = questionList[questionNum][2]
+        Toast.makeText(this, questionList[0][0]+" "+questionList[0][1]+" "+questionList[0][2], Toast.LENGTH_SHORT).show()
+
+        gameActivityBinding.choiceButtonA.setOnClickListener{
+            questionNum++
+            gameActivityBinding.questionTextView.text = questionList[questionNum][0]
+            gameActivityBinding.choiceButtonA.text = questionList[questionNum][1]
+            gameActivityBinding.choiceButtonB.text = questionList[questionNum][2]
+        }
+        gameActivityBinding.choiceButtonB.setOnClickListener{
+            questionNum++
+            gameActivityBinding.questionTextView.text = questionList[questionNum][0]
+            gameActivityBinding.choiceButtonA.text = questionList[questionNum][1]
+            gameActivityBinding.choiceButtonB.text = questionList[questionNum][2]
+        }
     }
 
     /*
