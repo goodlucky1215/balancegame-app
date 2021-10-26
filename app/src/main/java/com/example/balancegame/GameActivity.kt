@@ -1,5 +1,6 @@
 package com.example.balancegame
 
+import android.content.res.AssetManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,17 +9,20 @@ import com.example.balancegame.databinding.ActivityGameBinding
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
+import java.io.InputStream
 
 class GameActivity : AppCompatActivity() {
     //메인 UI
     private lateinit var gameActivityBinding: ActivityGameBinding
     //문제 목록
-    //private lateinit var questionList : ArrayList<List<String>>
+    private lateinit var questionList : ArrayList<List<String>>
 
+    /*
     val questionList = arrayOf(
         arrayOf("3","3","#"),
         arrayOf("4","4","*")
     )
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -27,7 +31,7 @@ class GameActivity : AppCompatActivity() {
         gameActivityBinding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(gameActivityBinding.root)
 
-        //questionDownload(intent.getStringExtra("catalogId"))
+        questionDownload(intent.getStringExtra("catalogId"))
         var questionNum : Int = 0
         gameActivityBinding.questionTextView.text = questionList[questionNum][0]
         gameActivityBinding.choiceButtonA.text = questionList[questionNum][1]
@@ -48,22 +52,15 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    /*
     private fun questionDownload(fileName: String?) {
         questionList = ArrayList()
-        val path = "C:\\balancegameQuestion\\fileName.txt"
-        Log.e("path ",path)
-        val file = File(path)
-        val reader = FileReader(file)
-        val buffer = BufferedReader(reader)
-        var temp = ""
-        while(true){
-            temp = buffer.readLine()
-            if (temp == null) break
-            val question = temp.toString().split("/")
+        val path = "1.txt"
+        val assetManager: AssetManager = resources.assets
+        val inputStream: InputStream = assetManager.open("1.txt")
+        inputStream.bufferedReader().readLines().forEach {
+            val question = it.split("/")
             questionList.add(question)
+            Toast.makeText(this, questionList[0][0]+" "+questionList[0][1]+" "+questionList[0][2], Toast.LENGTH_SHORT).show()
         }
-        buffer.close()
     }
-    */
 }
