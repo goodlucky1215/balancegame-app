@@ -1,10 +1,13 @@
 package com.example.balancegame
 
+import android.content.Intent
 import android.content.res.AssetManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.balancegame.databinding.ActivityGameBinding
 import java.io.BufferedReader
 import java.io.File
@@ -12,6 +15,8 @@ import java.io.FileReader
 import java.io.InputStream
 
 class GameActivity : AppCompatActivity() {
+    private val TAG = "IN_GAME";
+    private val MAX_PROBLEM_NUMBER = 16;
     //메인 UI
     private lateinit var gameActivityBinding: ActivityGameBinding
     //문제 목록
@@ -39,16 +44,26 @@ class GameActivity : AppCompatActivity() {
         Toast.makeText(this, questionList[0][0]+" "+questionList[0][1]+" "+questionList[0][2], Toast.LENGTH_SHORT).show()
 
         gameActivityBinding.choiceButtonA.setOnClickListener{
+            if (questionNum < MAX_PROBLEM_NUMBER) {
+                gameActivityBinding.questionTextView.text = questionList[questionNum][0]
+                gameActivityBinding.choiceButtonA.text = questionList[questionNum][1]
+                gameActivityBinding.choiceButtonB.text = questionList[questionNum][2]
+            } else if (questionNum >= MAX_PROBLEM_NUMBER) {
+                goResultPage()
+            }
             questionNum++
-            gameActivityBinding.questionTextView.text = questionList[questionNum][0]
-            gameActivityBinding.choiceButtonA.text = questionList[questionNum][1]
-            gameActivityBinding.choiceButtonB.text = questionList[questionNum][2]
         }
         gameActivityBinding.choiceButtonB.setOnClickListener{
+            if (questionNum < MAX_PROBLEM_NUMBER) {
+                gameActivityBinding.questionTextView.text = questionList[questionNum][0]
+                gameActivityBinding.choiceButtonA.text = questionList[questionNum][1]
+                gameActivityBinding.choiceButtonB.text = questionList[questionNum][2]
+            } else if (questionNum >= MAX_PROBLEM_NUMBER) {
+                goResultPage()
+                Log.i(TAG, "여기")
+            }
             questionNum++
-            gameActivityBinding.questionTextView.text = questionList[questionNum][0]
-            gameActivityBinding.choiceButtonA.text = questionList[questionNum][1]
-            gameActivityBinding.choiceButtonB.text = questionList[questionNum][2]
+            Log.i(TAG, questionNum.toString());
         }
     }
 
@@ -62,5 +77,10 @@ class GameActivity : AppCompatActivity() {
             questionList.add(question)
             Toast.makeText(this, questionList[0][0]+" "+questionList[0][1]+" "+questionList[0][2], Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun goResultPage() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.gameActivity, ResultFragment()).commit()
     }
 }
