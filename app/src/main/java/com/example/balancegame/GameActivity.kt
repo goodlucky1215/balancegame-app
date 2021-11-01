@@ -15,72 +15,33 @@ import java.io.FileReader
 import java.io.InputStream
 
 class GameActivity : AppCompatActivity() {
-    private val TAG = "IN_GAME";
-    private val MAX_PROBLEM_NUMBER = 16;
-    //메인 UI
-    private lateinit var gameActivityBinding: ActivityGameBinding
-    //문제 목록
-    private lateinit var questionList : ArrayList<List<String>>
-
-    /*
-    val questionList = arrayOf(
-        arrayOf("3","3","#"),
-        arrayOf("4","4","*")
-    )
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+        goGamePage()
 
-        //화면 가져오기
-        gameActivityBinding = ActivityGameBinding.inflate(layoutInflater)
-        setContentView(gameActivityBinding.root)
-
-        questionDownload(intent.getStringExtra("catalogId"))
-        var questionNum : Int = 0
-        gameActivityBinding.questionTextView.text = questionList[questionNum][0]
-        gameActivityBinding.choiceButtonA.text = questionList[questionNum][1]
-        gameActivityBinding.choiceButtonB.text = questionList[questionNum][2]
-        Toast.makeText(this, questionList[0][0]+" "+questionList[0][1]+" "+questionList[0][2], Toast.LENGTH_SHORT).show()
-
-        gameActivityBinding.choiceButtonA.setOnClickListener{
-            if (questionNum < MAX_PROBLEM_NUMBER) {
-                gameActivityBinding.questionTextView.text = questionList[questionNum][0]
-                gameActivityBinding.choiceButtonA.text = questionList[questionNum][1]
-                gameActivityBinding.choiceButtonB.text = questionList[questionNum][2]
-            } else if (questionNum >= MAX_PROBLEM_NUMBER) {
-                goResultPage()
-            }
-            questionNum++
-        }
-        gameActivityBinding.choiceButtonB.setOnClickListener{
-            if (questionNum < MAX_PROBLEM_NUMBER) {
-                gameActivityBinding.questionTextView.text = questionList[questionNum][0]
-                gameActivityBinding.choiceButtonA.text = questionList[questionNum][1]
-                gameActivityBinding.choiceButtonB.text = questionList[questionNum][2]
-            } else if (questionNum >= MAX_PROBLEM_NUMBER) {
-                goResultPage()
-                Log.i(TAG, "여기")
-            }
-            questionNum++
-            Log.i(TAG, questionNum.toString());
-        }
     }
 
-    private fun questionDownload(fileName: String?) {
-        questionList = ArrayList()
-        val path = "1.txt"
-        val assetManager: AssetManager = resources.assets
-        val inputStream: InputStream = assetManager.open("1.txt")
-        inputStream.bufferedReader().readLines().forEach {
-            val question = it.split("/")
-            questionList.add(question)
-            Toast.makeText(this, questionList[0][0]+" "+questionList[0][1]+" "+questionList[0][2], Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun goResultPage() {
+    private fun goGamePage() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.gameActivity, ResultFragment()).commit()
+            .replace(R.id.gameActivity, GameFragment()).commit()
+    }
+
+    fun goResultPage(answerList : ArrayList<Int>) {
+        //몇번째 게임인지 받아오니깐 값 저장할 때 이걸 이용해서 insert하면 됨
+        Toast.makeText(this,intent.getIntExtra("catalogId",0).toString(), Toast.LENGTH_SHORT).show()
+        //answerList는 선택한 결과서임!!
+        //여기서 결과를 저장하고 화면 이동을 하는게 낫지???
+
+        var resultFragment = ResultFragment()
+        var bundle = Bundle()
+        bundle.putInt("num1",1) //사람을 구분해서 공유받으려면...여기서 조치를 해야할듯?
+        resultFragment.arguments = bundle //fragment의 arguments에 데이터를 담은 bundle을 넘겨줌
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.gameActivity, ResultFragment())
+            .commit()
+
     }
 }

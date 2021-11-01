@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             //여기에 게임 접속 화면을 연결하면 됨***////////////////////
             Toast.makeText(this, " 게임번호 : "+it.catalogId.toString()+", 게임이름 : "+it.catalogName, Toast.LENGTH_SHORT).show()
             val intent = Intent(this, GameActivity::class.java)
-                .putExtra("catalogId",it.catalogId.toString())
+                .putExtra("catalogId", Integer.parseInt(it.catalogId.toString())) //kotlin은 형 변환에 예민~~
             startActivity(intent)
         })
         mainActivityBinding.catalogRecyclerView.layoutManager = LinearLayoutManager(this)
