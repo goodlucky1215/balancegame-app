@@ -29,7 +29,9 @@ class GameActivity : AppCompatActivity() {
 
     fun goResultPage(answerList : ArrayList<Int>) {
         //몇번째 게임인지 받아오니깐 값 저장할 때 이걸 이용해서 insert하면 됨
-        Toast.makeText(this,intent.getIntExtra("catalogId",0).toString(), Toast.LENGTH_SHORT).show()
+        Toast.makeText(this
+            ,intent.getStringExtra("userCode") +" ===> "+intent.getIntExtra("catalogId",0).toString()
+            , Toast.LENGTH_SHORT).show()
         //answerList는 선택한 결과서임!!
         //여기서 결과를 저장하고 화면 이동을 하는게 낫지???
 

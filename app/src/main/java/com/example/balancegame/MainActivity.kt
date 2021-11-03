@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity() {
     //get,post url주소
     private lateinit var balanceService : BalanceService
     val urlSave = UrlSave()
-
+    //사용자 구분 코드
+    private lateinit var userCode : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, " 게임번호 : "+it.catalogId.toString()+", 게임이름 : "+it.catalogName, Toast.LENGTH_SHORT).show()
             val intent = Intent(this, GameActivity::class.java)
                 .putExtra("catalogId", Integer.parseInt(it.catalogId.toString())) //kotlin은 형 변환에 예민~~
+                .putExtra("userCode", userCode)
             startActivity(intent)
         })
         mainActivityBinding.catalogRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -80,6 +82,7 @@ class MainActivity : AppCompatActivity() {
                     response.body()?.let{
                         //리스트 뷰 안에 카탈로그 목록 뿌려주기
                         catalogListAdapter.submitList(it.catalogListData?.orEmpty())
+                        userCode = it.userCode
                         Toast.makeText(applicationContext,  "접속 성공", Toast.LENGTH_SHORT).show()
                     }
                 }

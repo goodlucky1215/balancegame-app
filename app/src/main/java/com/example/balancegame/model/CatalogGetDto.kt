@@ -3,6 +3,7 @@ package com.example.balancegame.model
 import com.google.gson.annotations.SerializedName
 
 data class CatalogGetDto(
+    @SerializedName("userCode") val userCode: String,
     @SerializedName("data") val catalogListData: ArrayList<CatalogDto>
 )
 /* 값을 가져오는 데이터의 예제
@@ -21,5 +22,5 @@ data class CatalogGetDto(
     }
     ],
     "message": null
-
+    "userCode" :
  */
