@@ -1,15 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/resultFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/resultFragment"
     tools:context=".ResultFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/shareTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="다른 사람이 나를 얼마나\n 맞추는지 알아보고 싶다면?"
+            android:textSize="24sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/shareImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/ic_baseline_share_24"
+            android:backgroundTint="@color/colorYellow"
+            app:layout_constraintLeft_toLeftOf="@id/shareTitleTextView"
+            app:layout_constraintRight_toRightOf="@id/shareTitleTextView"
+            app:layout_constraintTop_toBottomOf="@+id/shareTitleTextView" />
+
+        <TextView
+            android:id="@+id/shareTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:includeFontPadding="false"
+            android:text="공유하기"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="@+id/shareImageView"
+            app:layout_constraintRight_toRightOf="@+id/shareImageView"
+            app:layout_constraintTop_toBottomOf="@+id/shareImageView" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonGoStatistics"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="60dp"
+            android:backgroundTint="@color/colorBlue"
+            android:includeFontPadding="false"
+            android:text="통계 보러가기"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/shareTextView" />
+
+        <LinearLayout
+            android:id="@+id/goBalanceGameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/buttonGoStatistics">
+
+            <TextView
+                android:id="@+id/goBalanceGameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="다른 밸런스 게임 하러가기"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/goBalanceGameImageView"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_baseline_arrow_right_alt_24"
+                android:backgroundTint="@color/colorBlue" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
