@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:balacegame_flutter/gameList.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,27 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BalanceGame',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
+      initialRoute: '/gameList',
+      routes: {
+        'gameList' : (context) => GameList()
+      },
     );
   }
 }
 
-class MyHomePage extends StatelessWidget{
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('밸런스 게임'),
-        elevation: 0.0,
-      ),
-    );
-  }
-
-}
 
