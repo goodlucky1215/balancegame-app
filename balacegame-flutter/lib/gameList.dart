@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
@@ -11,6 +10,18 @@ class GameList extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         title: Text('밸런스 게임'),
+      ),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            RaisedButton(
+              color: Colors.red,
+              child: Text('gogogogog BBBBB'),
+              onPressed: (){
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -31,5 +42,5 @@ void gameListGetHttp() async{
   } catch(e){
    logger.d("gameListGetHttp =====> "+e.toString());
   }
-  response.
+  print(response);
 }
