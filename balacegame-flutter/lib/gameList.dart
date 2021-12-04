@@ -1,3 +1,5 @@
+import 'package:balacegame_flutter/api/balanceService.dart';
+import 'package:balacegame_flutter/model/catalogGetDto.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
@@ -5,24 +7,21 @@ import 'package:logger/logger.dart';
 var logger = Logger();
 
 class GameList extends StatelessWidget{
+  final dio = Dio();
+
   @override
   Widget build(BuildContext context) {
+    final balanceList = BalanceService(dio);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('밸런스 게임'),
       ),
       body: Center(
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-              color: Colors.red,
-              child: Text('gogogogog BBBBB'),
-              onPressed: (){
-              },
-            ),
-          ],
+        child: FutureBuilder<CatalogGetDto?>(
+
         ),
-      ),
+      )
     );
   }
 
