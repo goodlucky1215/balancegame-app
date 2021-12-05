@@ -3,17 +3,21 @@ import 'package:json_annotation/json_annotation.dart';
 /// 이 구문은 `User` 클래스가 생성된 파일의 private 멤버들을
 /// 접근할 수 있도록 해줍니다. 여기에는 *.g.dart 형식이 들어갑니다.
 /// * 에는 소스 파일의 이름이 들어갑니다.
-part 'catalogGetDto.g.dart';
+part 'CatalogGetDto.g.dart';
 
 /// 코드 생성기에 이 클래스가 JSON 직렬화 로직이 만들어져야 한다고 알려주는 어노테이션입니다.
 @JsonSerializable()
 class CatalogGetDto {
+  int success;
+  CatalogListData data;
+  String message;
+  String userCode;
+
   CatalogGetDto({
-    required this.id,
-    required this.email,
-    required this.firstName,
-    required this.lastName,
-    required this.avatar,
+    required this.success,
+    required this.data,
+    required this.message,
+    required this.userCode
   });
 
   int id;
@@ -31,4 +35,22 @@ class CatalogGetDto {
   /// `toJson`은 클래스가 JSON 인코딩의 지원을 선언하는 규칙입니다.
   /// 이의 구현은 생성된 private 헬퍼 메서드 `_$UserToJson`을 단순히 호출합니다.
   Map<String, dynamic> toJson() => _$CatalogGetDtoToJson(this);
+}
+
+@JsonSerializable()
+class CatalogListData {
+  int catalogId;
+  String catalogName;
+  String questionDtos;
+
+  CatalogListData({
+    required this.catalogId,
+    required this.catalogName,
+    required this.questionDtos
+ });
+
+  factory CatalogListData.fromJson(Map<String, dynamic> json) =>
+      _$CatalogListDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CatalogListDataFromJson(this);
 }

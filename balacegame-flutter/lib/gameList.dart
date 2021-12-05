@@ -6,22 +6,49 @@ import 'package:logger/logger.dart';
 
 var logger = Logger();
 
-class GameList extends StatelessWidget{
-  final dio = Dio();
+class GameList extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => WidgetGameList();
+}
+
+class WidgetGameList extends State<GameList> {
+  late CatalogGetDto response;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    final balanceList = BalanceService(dio);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('밸런스 게임'),
       ),
-      body: Center(
-        child: FutureBuilder<CatalogGetDto?>(
+      body: getGameList(),
+      );
+  }
 
-        ),
-      )
+  getGameList(){
+    late Widget page;
+    if(!isLoading){
+      page = page0();
+      getData();
+    } else {
+      page = page1();
+    }
+    return page;
+  }
+
+  getGameList1(){
+    final dio = Dio();
+    final client = BalanceService(dio);
+    client.getUser()
+  }
+
+  ListView page1(){
+    return ListView(
+      children: <Widget>[
+        ListTile(
+          title: Text(response.),
+        )
+      ],
     );
   }
 

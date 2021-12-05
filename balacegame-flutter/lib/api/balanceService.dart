@@ -9,5 +9,6 @@ abstract class BalanceService {
   factory BalanceService(Dio dio, {String baseUrl}) = _BalanceService;
 
   @GET('/api/1.0/catalogs')
-  Future<CatalogGetDto> getUser({@Path() required int id});
+  Future<Map<String,List<CatalogGetDto>>> getUser();
+
 }
