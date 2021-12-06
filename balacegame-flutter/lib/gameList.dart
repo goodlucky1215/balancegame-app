@@ -1,5 +1,5 @@
 import 'package:balacegame_flutter/api/balanceService.dart';
-import 'package:balacegame_flutter/model/catalogGetDto.dart';
+import 'package:balacegame_flutter/model/catalogModel.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
@@ -28,45 +28,44 @@ class WidgetGameList extends State<GameList> {
   getGameList(){
     late Widget page;
     if(!isLoading){
-      page = page0();
-      getData();
+      page = pageIsNot();
+      getBalanceGameListData();
     } else {
-      page = page1();
+      page = pageIs();
     }
     return page;
   }
 
-  getGameList1(){
+  getBalanceGameListData(){
     final dio = Dio();
     final client = BalanceService(dio);
-    client.getUser()
+    client.getBalanceGameList()
+    .then((it){
+      setState(() {
+        response = ((it['data'] as List)[0]) as CatalogGetDto;
+        isLoading = true;
+      });
+    });
   }
 
-  ListView page1(){
+  Container pageIsNot(){
+    return Container(
+      alignment: Alignment.center,
+      child: Text(
+        'Loading...',
+        style: TextStyle(fontSize: 30),
+      ),
+    );
+  }
+
+  ListView pageIs(){
     return ListView(
       children: <Widget>[
         ListTile(
-          title: Text(response.),
+          title: Text(response.data.catalogName),
         )
       ],
     );
   }
 
-}
-
-//게임 목록 가져오기
-void gameListGetHttp() async{
-  var dio = Dio(
-    BaseOptions(
-        connectTimeout : 5000,
-        receiveTimeout : 3000
-    )
-  );
-  var response;
-  try{
-    response = await dio.get('http://10.0.2.2:9090/api/1.0/catalogs');
-  } catch(e){
-   logger.d("gameListGetHttp =====> "+e.toString());
-  }
-  print(response);
 }

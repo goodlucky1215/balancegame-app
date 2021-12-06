@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:balacegame_flutter/model/catalogGetDto.dart';
+import 'package:balacegame_flutter/model/catalogModel.dart';
 import 'package:retrofit/retrofit.dart';
 part 'balanceService.g.dart';
 
@@ -9,6 +8,6 @@ abstract class BalanceService {
   factory BalanceService(Dio dio, {String baseUrl}) = _BalanceService;
 
   @GET('/api/1.0/catalogs')
-  Future<Map<String,List<CatalogGetDto>>> getUser();
+  Future<Map<String,List<CatalogGetDto>>> getBalanceGameList();
 
 }
