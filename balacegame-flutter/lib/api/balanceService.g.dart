@@ -16,22 +16,19 @@ class _BalanceService implements BalanceService {
   String? baseUrl;
 
   @override
-  Future<Map<String, List<CatalogGetDto>>> getBalanceGameList() async {
+  Future<Map<String, CatalogGetDto>> getBalanceGameList() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Map<String, List<CatalogGetDto>>>(
+        _setStreamType<Map<String, CatalogGetDto>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/api/1.0/catalogs',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!.map((k, dynamic v) => MapEntry(
-        k,
-        (v as List)
-            .map((i) => CatalogGetDto.fromJson(i as Map<String, dynamic>))
-            .toList()));
+    var value = _result.data!.map((k, dynamic v) =>
+        MapEntry(k, CatalogGetDto.fromJson(v as Map<String, dynamic>)));
     return value;
   }
 

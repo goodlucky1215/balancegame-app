@@ -62,7 +62,7 @@ class WidgetGameList extends State<GameList> {
     return ListView(
       children: <Widget>[
         ListTile(
-          title: Text(response.data.catalogName),
+          title: Text(response.data[0].catalogName),
         )
       ],
     );

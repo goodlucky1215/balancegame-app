@@ -10,13 +10,13 @@ class catalogModel{}
 /// 코드 생성기에 이 클래스가 JSON 직렬화 로직이 만들어져야 한다고 알려주는 어노테이션입니다.
 @JsonSerializable()
 class CatalogGetDto {
-  int success;
-  CatalogListData data;
+  //bool success;
+  List<CatalogListData> data;
   String message;
   String userCode;
 
   CatalogGetDto({
-    required this.success,
+    //required this.success,
     required this.data,
     required this.message,
     required this.userCode
@@ -35,16 +35,16 @@ class CatalogGetDto {
 class CatalogListData {
   int catalogId;
   String catalogName;
-  String questionDtos;
+  //Set<Object> questionDtos;
 
   CatalogListData({
     required this.catalogId,
     required this.catalogName,
-    required this.questionDtos
+    //required this.questionDtos
   });
 
-  factory CatalogListData.fromJson(Map<String, dynamic> json) =>
+  factory CatalogListData.fromJson(dynamic json) =>
       _$CatalogListDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CatalogListDataToJson(this);
+  dynamic toJson() => _$CatalogListDataToJson(this);
 }
