@@ -8,6 +8,6 @@ abstract class BalanceService {
   factory BalanceService(Dio dio, {String baseUrl}) = _BalanceService;
 
   @GET('/api/1.0/catalogs')
-  Future<Map<String,CatalogGetDto>> getBalanceGameList();
+  Future<CatalogGetDto> getBalanceGameList();
 
 }

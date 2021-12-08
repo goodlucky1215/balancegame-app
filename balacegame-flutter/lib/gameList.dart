@@ -42,7 +42,7 @@ class WidgetGameList extends State<GameList> {
     client.getBalanceGameList()
     .then((it){
       setState(() {
-        response = ((it['data'] as List)[0]) as CatalogGetDto;
+        response = it;
         isLoading = true;
       });
     });

@@ -8,15 +8,17 @@ part of 'catalogModel.dart';
 
 CatalogGetDto _$CatalogGetDtoFromJson(Map<String, dynamic> json) =>
     CatalogGetDto(
+      success: json['success'] as bool,
       data: (json['data'] as List<dynamic>)
-          .map((e) => CatalogListData.fromJson(e))
+          .map((e) => CatalogListData.fromJson(e as Map<String, dynamic>))
           .toList(),
-      message: json['message'] as String,
+      message: json['message'] as String?,
       userCode: json['userCode'] as String,
     );
 
 Map<String, dynamic> _$CatalogGetDtoToJson(CatalogGetDto instance) =>
     <String, dynamic>{
+      'success': instance.success,
       'data': instance.data,
       'message': instance.message,
       'userCode': instance.userCode,
