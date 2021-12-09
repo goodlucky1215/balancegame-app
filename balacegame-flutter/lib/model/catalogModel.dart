@@ -46,5 +46,5 @@ class CatalogListData {
   factory CatalogListData.fromJson(Map<String, dynamic> json) =>
       _$CatalogListDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CatalogListDataToJson(this);
+  Map<String, dynamic>  toJson() => _$CatalogListDataToJson(this);
 }

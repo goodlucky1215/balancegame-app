@@ -59,12 +59,31 @@ class WidgetGameList extends State<GameList> {
   }
 
   ListView pageIs(){
-    return ListView(
-      children: <Widget>[
-        ListTile(
-          title: Text(response.data[0].catalogName),
-        )
-      ],
+    return ListView.separated(
+      padding: const EdgeInsets.all(10),
+      itemCount: response.data.length,
+      itemBuilder: (BuildContext context, int index){
+        return new GestureDetector(
+            child:  Column(
+              children: <Widget>[
+                ButtonTheme(
+                  minWidth: MediaQuery.of(context).size.width * 0.90,
+                  height: MediaQuery.of(context).size.width * 0.30,
+                  child: RaisedButton(
+                      color: Colors.lightBlueAccent,
+                      child: Text(response.data[index].catalogName),
+                      onPressed: (){
+                        Navigator.pushNamed(context, '/b');
+                      }
+                  ),
+                )
+              ]
+            ),
+        );
+
+      },
+
+        separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 
