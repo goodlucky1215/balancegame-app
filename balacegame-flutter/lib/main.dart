@@ -1,3 +1,4 @@
+import 'package:balacegame_flutter/BalanceGameStart.dart';
 import 'package:flutter/material.dart';
 import 'package:balacegame_flutter/gameList.dart';
 
@@ -12,9 +13,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/' : (context) => GameList(),
+        '/balanceGameStart' : (context) => BalanceGameStart(),
       },
     );
   }
 }
-
 

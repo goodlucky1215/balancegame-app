@@ -25,7 +25,7 @@ class _BalanceService implements BalanceService {
         _setStreamType<CatalogGetDto>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/api/1.0/catalogs',
-                    queryParameters: queryParameters, data: _data)
+                queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CatalogGetDto.fromJson(_result.data!);
     return value;
