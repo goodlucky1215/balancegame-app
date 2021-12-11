@@ -73,8 +73,7 @@ class WidgetGameList extends State<GameList> {
                       color: Colors.lightBlueAccent,
                       child: Text(response.data[index].catalogName),
                       onPressed: (){
-                        //context.
-                        Navigator.pushNamed(context, '/balanceGameStart');
+                        Navigator.pushNamed(context, '/balanceGameStart',arguments:response.data[index].catalogId);
                       }
                   ),
                 )
