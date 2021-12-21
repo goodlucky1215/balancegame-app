@@ -1,37 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'model/catalogModel.dart';
 
 
 class BalanceGameStart extends StatefulWidget {
-  const BalanceGameStart({Key? key}) : super(key: key);
   @override
-  GameStart createState() => GameStart();
+  State createState() {
+    return GameStart();
+  }
 }
 
 class GameStart extends State<BalanceGameStart> {
-
+  int i = 0;
   @override
   Widget build(BuildContext context) {
-    final CatalogListData id = ModalRoute.of(context)!.settings.arguments as CatalogListData;
+    final CatalogListData id = ModalRoute
+        .of(context)!
+        .settings
+        .arguments as CatalogListData;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(id.catalogName),
       ),
-      body: getQuiz('assets/'+id.catalogId.toString()+'.txt'),
+      body: Center(
+        child: FutureBuilder(
+          future:getQuiz('assets/'+id.catalogId.toString()+'.txt'),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> catalogQuestion) {
+            final catalogQuestionList = catalogQuestion.data.toString();
+            final catalogQuestionLine = catalogQuestionList.split('\n');
+            List<List<String>> catalogQuestionLineSplit = [];
+            for (var row in catalogQuestionLine) {
+              catalogQuestionLineSplit.add(row.split('/'));
+              print(row);
+            }
+            return result(catalogQuestionLineSplit);
+          }))
     );
   }
 
-  getQuiz(String txtFile) {
-    var bundle = DefaultAssetBundle.of(context);
-    var a = bundle.loadString(txtFile).asStream();
+      Column result(List<List<String>> catalogQuestionLineSplit){
+            return (Column(
+                children: <Widget>[
+                Container(
+                    child: Text(catalogQuestionLineSplit[i][0])
+                ),
+                Row(
+                  children: <Widget>[
+                    makeButton(catalogQuestionLineSplit[i][1],()=>i++),
+                    makeButton(catalogQuestionLineSplit[i][2],()=>i++),
+                  ],
+                ),
+                ])
+            );
+          }
 
-    final contents = bundle.toString();
-    // 개행 단위로 분리(한줄씩 자르는 거임)
-    //final rows = contents.split('\n');
-    // 이번 파일에서 구분 문자는 (/)
-    //var cols = rows[2].split('/');
-    print(a.);
+  Future<String> getQuiz(String textPath) async{
+    return await rootBundle.loadString(textPath);
+  }
+  Widget makeButton(String title, VoidCallback callback) {
+    return RaisedButton(
+      child: Text(title),
+      onPressed: () {
+        setState(() {
+          callback();
+        });
+      },
+    );
   }
 
 }
-
