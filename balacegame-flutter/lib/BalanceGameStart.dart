@@ -12,6 +12,8 @@ class BalanceGameStart extends StatefulWidget {
 
 class GameStart extends State<BalanceGameStart> {
   int i = 0;
+  var check = new List.filled(10, 0, growable: false);
+
   @override
   Widget build(BuildContext context) {
     final CatalogListData id = ModalRoute
@@ -47,8 +49,8 @@ class GameStart extends State<BalanceGameStart> {
                 ),
                 Row(
                   children: <Widget>[
-                    makeButton(catalogQuestionLineSplit[i][1],()=>i++),
-                    makeButton(catalogQuestionLineSplit[i][2],()=>i++),
+                    makeButton(catalogQuestionLineSplit[i][1],1,()=>i++),
+                    makeButton(catalogQuestionLineSplit[i][2],2,()=>i++),
                   ],
                 ),
                 ])
@@ -58,12 +60,15 @@ class GameStart extends State<BalanceGameStart> {
   Future<String> getQuiz(String textPath) async{
     return await rootBundle.loadString(textPath);
   }
-  Widget makeButton(String title, VoidCallback callback) {
+
+  Widget makeButton(String title, int choice, VoidCallback callback) {
+    check[i] = choice;
     return RaisedButton(
       child: Text(title),
       onPressed: () {
         setState(() {
-          callback();
+          if(i<9) callback();
+          else Navigator.pushNamed(context, '/balanceGameResult',arguments: check);
         });
       },
     );

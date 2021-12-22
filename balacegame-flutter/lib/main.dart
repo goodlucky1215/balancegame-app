@@ -2,6 +2,8 @@ import 'package:balacegame_flutter/BalanceGameStart.dart';
 import 'package:flutter/material.dart';
 import 'package:balacegame_flutter/gameList.dart';
 
+import 'BalanceGameResult.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/' : (context) => GameList(),
         '/balanceGameStart' : (context) => BalanceGameStart(),
+        '/balanceGameResult' : (context) => BalanceGameResult(),
       },
     );
   }
