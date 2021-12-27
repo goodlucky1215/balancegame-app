@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/' : (context) => GameList(),
         '/balanceGameStart' : (context) => BalanceGameStart(),
-        '/balanceGameResult' : (context) => BalanceGameResult(),
+        BalanceGameResult.routeName: (ctx) => BalanceGameResult(),
       },
     );
   }

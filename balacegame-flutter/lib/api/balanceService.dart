@@ -9,5 +9,4 @@ abstract class BalanceService {
 
   @GET('/api/1.0/catalogs')
   Future<CatalogGetDto> getBalanceGameList();
-
 }
