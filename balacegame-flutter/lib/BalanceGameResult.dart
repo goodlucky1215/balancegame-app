@@ -1,3 +1,5 @@
+import 'package:balacegame_flutter/GameList.dart';
+import 'package:balacegame_flutter/StatisticsScreen.dart';
 import 'package:flutter/material.dart';
 
 class BalanceGameResult extends StatelessWidget {
@@ -5,8 +7,6 @@ class BalanceGameResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final check = ModalRoute.of(context)!.settings.arguments as List;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('결과'),
@@ -51,7 +51,9 @@ class BalanceGameResult extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 32, vertical: 18),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(StatisticsScreen.routeName);
+              },
             ),
           ),
           Row(
@@ -66,14 +68,18 @@ class BalanceGameResult extends StatelessWidget {
                   style: TextButton.styleFrom(
                     primary: Colors.black,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(GameList.routeName);
+                  },
                 ),
               ),
               IconButton(
-                onPressed: () {},
                 icon: const Icon(Icons.arrow_right_alt_outlined),
                 color: Theme.of(context).primaryColor,
                 iconSize: 40,
+                onPressed: () {
+                  Navigator.of(context).pushNamed(GameList.routeName);
+                },
               ),
             ],
           )

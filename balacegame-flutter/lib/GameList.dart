@@ -1,5 +1,7 @@
 import 'package:balacegame_flutter/api/balanceService.dart';
 import 'package:balacegame_flutter/model/catalogModel.dart';
+import 'package:balacegame_flutter/providers/Statistics.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
@@ -7,6 +9,7 @@ import 'package:logger/logger.dart';
 var logger = Logger();
 
 class GameList extends StatefulWidget {
+  static const routeName = '/';
   @override
   State<StatefulWidget> createState() => WidgetGameList();
 }
@@ -22,12 +25,12 @@ class WidgetGameList extends State<GameList> {
         title: Text('밸런스 게임'),
       ),
       body: getGameList(),
-      );
+    );
   }
 
-  getGameList(){
+  getGameList() {
     late Widget page;
-    if(!isLoading){
+    if (!isLoading) {
       page = pageIsNot();
       getBalanceGameListData();
     } else {
@@ -36,11 +39,10 @@ class WidgetGameList extends State<GameList> {
     return page;
   }
 
-  getBalanceGameListData(){
+  getBalanceGameListData() {
     final dio = Dio();
     final client = BalanceService(dio);
-    client.getBalanceGameList()
-    .then((it){
+    client.getBalanceGameList().then((it) {
       setState(() {
         response = it;
         isLoading = true;
@@ -48,7 +50,7 @@ class WidgetGameList extends State<GameList> {
     });
   }
 
-  Container pageIsNot(){
+  Container pageIsNot() {
     return Container(
       alignment: Alignment.center,
       child: Text(
@@ -58,33 +60,30 @@ class WidgetGameList extends State<GameList> {
     );
   }
 
-  ListView pageIs(){
+  ListView pageIs() {
     return ListView.separated(
       padding: const EdgeInsets.all(10),
       itemCount: response.data.length,
-      itemBuilder: (BuildContext context, int index){
+      itemBuilder: (BuildContext context, int index) {
         return new GestureDetector(
-            child:  Column(
-              children: <Widget>[
-                ButtonTheme(
-                  minWidth: MediaQuery.of(context).size.width * 0.90,
-                  height: MediaQuery.of(context).size.width * 0.30,
-                  child: RaisedButton(
-                      color: Colors.lightBlueAccent,
-                      child: Text(response.data[index].catalogName),
-                      onPressed: (){
-                        Navigator.pushNamed(context, '/balanceGameStart',arguments:response.data[index]);
-                      }
-                  ),
-                )
-              ]
-            ),
+          child: Column(children: <Widget>[
+            ButtonTheme(
+              minWidth: MediaQuery.of(context).size.width * 0.90,
+              height: MediaQuery.of(context).size.width * 0.30,
+              child: RaisedButton(
+                  color: Colors.lightBlueAccent,
+                  child: Text(response.data[index].catalogName),
+                  onPressed: () {
+                    Provider.of<Statistics>(context, listen: false)
+                        .setCatalogData(response.data[index]);
+                    Navigator.pushNamed(context, '/balanceGameStart',
+                        arguments: response.data[index]);
+                  }),
+            )
+          ]),
         );
-
       },
-
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
+      separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
-
 }
