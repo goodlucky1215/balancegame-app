@@ -27,6 +27,9 @@ class GameStart extends State<BalanceGameStart> {
                 future: getQuiz('assets/' + id.catalogId.toString() + '.txt'),
                 builder: (BuildContext context,
                     AsyncSnapshot<dynamic> catalogQuestion) {
+                  if (catalogQuestion.hasData == false) {
+                    return CircularProgressIndicator();
+                  }
                   final catalogQuestionList = catalogQuestion.data.toString();
                   final catalogQuestionLine = catalogQuestionList.split('\n');
                   List<List<String>> catalogQuestionLineSplit = [];

@@ -51,6 +51,9 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                   '.txt'),
               builder: (BuildContext context,
                   AsyncSnapshot<dynamic> catalogQuestion) {
+                if (catalogQuestion.hasData == false) {
+                  return CircularProgressIndicator();
+                }
                 final catalogQuestionList = catalogQuestion.data.toString();
                 final catalogQuestionLine = catalogQuestionList.split('\n');
                 List<List<String>> catalogQuestionLineSplit = [];
