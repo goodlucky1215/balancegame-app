@@ -1,12 +1,20 @@
 import 'package:balacegame_flutter/GameList.dart';
 import 'package:balacegame_flutter/StatisticsScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+
+var logger = Logger();
 
 class BalanceGameResult extends StatelessWidget {
   static const routeName = '/balanceGameResult';
 
   @override
   Widget build(BuildContext context) {
+    final Map args = ModalRoute.of(context)!.settings.arguments as Map;
+    int catalogId = args['catalogId'];
+    List check = args['check'];
+    logger.d("catalogId => " + catalogId.toString());
+    logger.d("choice number => " + check.toString());
     return Scaffold(
       appBar: AppBar(
         title: const Text('결과'),

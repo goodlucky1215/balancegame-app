@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'BalanceGameResult.dart';
 import 'model/catalogModel.dart';
 
 class BalanceGameStart extends StatefulWidget {
+  static const routeName = '/balaceGameStart';
   @override
   State createState() {
     return GameStart();
@@ -67,8 +69,8 @@ class GameStart extends State<BalanceGameStart> {
           if (i < 9)
             callback();
           else
-            Navigator.pushNamed(context, '/balanceGameResult',
-                arguments: catalogId);
+            Navigator.pushNamed(context, BalanceGameResult.routeName,
+                arguments: {"catalogId" : catalogId, "check" : check});
         });
       },
     );

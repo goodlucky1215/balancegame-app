@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
+import 'BalanceGameStart.dart';
+
 var logger = Logger();
 
 class GameList extends StatefulWidget {
@@ -76,7 +78,7 @@ class WidgetGameList extends State<GameList> {
                   onPressed: () {
                     Provider.of<Statistics>(context, listen: false)
                         .setCatalogData(response.data[index]);
-                    Navigator.pushNamed(context, '/balanceGameStart',
+                    Navigator.pushNamed(context, BalanceGameStart.routeName,
                         arguments: response.data[index]);
                   }),
             )
