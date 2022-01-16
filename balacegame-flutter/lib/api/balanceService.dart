@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:balacegame_flutter/model/catalogModel.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:retrofit/retrofit.dart';
 part 'balanceService.g.dart';
 
@@ -7,6 +8,14 @@ part 'balanceService.g.dart';
 abstract class BalanceService {
   factory BalanceService(Dio dio, {String baseUrl}) = _BalanceService;
 
+  //게임 리스트 가져오기
   @GET('/api/1.0/catalogs')
   Future<CatalogGetDto> getBalanceGameList();
+
+  //통계에 값 저장
+  @POST('/api/1.0/statistics/insert')
+  Future<int> insertBalanceGameStatistics(
+    @Body() @JsonSerializable() String json
+  );
 }
+

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:logger/logger.dart';
 import 'BalanceGameResult.dart';
 import 'model/catalogModel.dart';
+
+var logger = Logger();
 
 class BalanceGameStart extends StatefulWidget {
   static const routeName = '/balaceGameStart';
@@ -13,7 +16,7 @@ class BalanceGameStart extends StatefulWidget {
 
 class GameStart extends State<BalanceGameStart> {
   int i = 0;
-  var check = new List.filled(10, 0, growable: false);
+  var check = new List.filled(16, 0, growable: false);
 
   @override
   Widget build(BuildContext context) {
@@ -45,34 +48,43 @@ class GameStart extends State<BalanceGameStart> {
 
   Column result(List<List<String>> catalogQuestionLineSplit, int catalogId) {
     return (Column(children: <Widget>[
-      Container(child: Text(catalogQuestionLineSplit[i][0])),
+      Container(
+          child: Text(catalogQuestionLineSplit[i][0])
+      ),
       Row(
         children: <Widget>[
           makeButton(catalogId, catalogQuestionLineSplit[i][1], 1, () => i++),
+          SizedBox(
+            height: 30.0,
+            width: 60.0,
+          ),
           makeButton(catalogId, catalogQuestionLineSplit[i][2], 2, () => i++),
         ],
       ),
-    ]));
+    ]
+    )
+    );
   }
 
   Future<String> getQuiz(String textPath) async {
     return await rootBundle.loadString(textPath);
   }
 
-  Widget makeButton(
-      int catalogId, String title, int choice, VoidCallback callback) {
-    check[i] = choice;
-    return RaisedButton(
-      child: Text(title),
-      onPressed: () {
-        setState(() {
-          if (i < 9)
-            callback();
-          else
-            Navigator.pushNamed(context, BalanceGameResult.routeName,
-                arguments: {"catalogId" : catalogId, "check" : check});
-        });
-      },
-    );
+  Widget makeButton(int catalogId, String title, int choice, VoidCallback callback) {
+    return
+          TextButton(
+          child: Text(title),
+          onPressed: () {
+            setState(() {
+              check[i] = choice;
+              if (i < 15)
+                callback();
+              else
+                Navigator.pushNamed(context, BalanceGameResult.routeName,
+                    arguments: {"catalogId" : catalogId, "check" : check});
+            });
+          },
+        );
   }
+
 }
