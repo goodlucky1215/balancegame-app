@@ -32,12 +32,12 @@ class _BalanceService implements BalanceService {
   }
 
   @override
-  Future<int> insertBalanceGameStatistics(json) async {
+  Future<String> insertBalanceGameStatistics(json) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = json;
-    final _result = await _dio.fetch<int>(_setStreamType<int>(
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
         Options(method: 'POST', headers: _headers, extra: _extra)
             .compose(_dio.options, '/api/1.0/statistics/insert',
                 queryParameters: queryParameters, data: _data)

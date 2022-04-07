@@ -14,8 +14,7 @@ abstract class BalanceService {
 
   //통계에 값 저장
   @POST('/api/1.0/statistics/insert')
-  Future<int> insertBalanceGameStatistics(
-    @Body() @JsonSerializable() String json
+  Future<String> insertBalanceGameStatistics(
+    @Body() @JsonSerializable() Object json
   );
 }
-
