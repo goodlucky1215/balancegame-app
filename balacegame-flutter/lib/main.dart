@@ -1,5 +1,5 @@
 import 'package:balacegame_flutter/BalanceGameStart.dart';
-import 'package:balacegame_flutter/GameList.dart';
+import 'package:balacegame_flutter/GameList1.dart';
 import 'package:balacegame_flutter/StatisticsScreen.dart';
 import 'package:balacegame_flutter/providers/Statistics.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         initialRoute: '/',
         routes: {
-          GameList.routeName: (context) => GameList(),
+          GameList1.routeName: (context) => GameList1(), //DB가 없는 경우
+          // GameList.routeName: (context) => GameList(), //DB가 있는 경우
           BalanceGameStart.routeName : (context) => BalanceGameStart(),
           BalanceGameResult.routeName: (context) => BalanceGameResult(),
           StatisticsScreen.routeName: (context) => StatisticsScreen(),
