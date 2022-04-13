@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
-import 'BalanceGameResult.dart';
+import 'BalanceGameResult1.dart';
 import 'model/catalogModel.dart';
 
 var logger = Logger();
@@ -80,7 +80,7 @@ class GameStart extends State<BalanceGameStart> {
               if (i < 15)
                 callback();
               else
-                Navigator.pushNamed(context, BalanceGameResult.routeName,
+                Navigator.pushNamed(context, BalanceGameResult1.routeName,
                     arguments: {"catalogId" : catalogId, "check" : check});
             });
           },
