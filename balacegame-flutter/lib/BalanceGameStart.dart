@@ -47,7 +47,8 @@ class GameStart extends State<BalanceGameStart> {
   }
 
   Column result(List<List<String>> catalogQuestionLineSplit, int catalogId) {
-    return (Column(
+    return (
+        Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
       Container(
@@ -57,13 +58,18 @@ class GameStart extends State<BalanceGameStart> {
                   height: 1.0
               ),
         ),
+
       ),
+          SizedBox(height: 50.0,),
       Row(
+    mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           makeButton(catalogId, catalogQuestionLineSplit[i][1], 1, () => i++),
         ],
       ),
+          SizedBox(height: 30.0,),
       Row(
+    mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           makeButton(catalogId, catalogQuestionLineSplit[i][2], 2, () => i++),
         ],
@@ -80,12 +86,13 @@ class GameStart extends State<BalanceGameStart> {
   Widget makeButton(int catalogId, String title, int choice, VoidCallback callback) {
     return
           TextButton(
-          child: Text(title,
-            style: TextStyle(
-              fontSize: 20,
-              height: 1.0,
+
+          child: Text(title),
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.lightBlueAccent,
+              primary: Colors.white, // foreground
+              textStyle: TextStyle(fontSize: 18),
             ),
-          ),
           onPressed: () {
             setState(() {
               check[i] = choice;
