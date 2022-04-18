@@ -64,6 +64,7 @@ flutter:
   assets:
     - assets/1.txt
     - assets/2.txt
+    - assets/3.txt
 
   # To add assets to your application, add an assets section, like this:
   # assets:
