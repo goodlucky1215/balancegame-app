@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.balacegame_flutter">
    <application
-        android:label="balacegame_flutter"
-        android:icon="@mipmap/ic_launcher">
+        android:label="심심할땐 밸런스게임"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
