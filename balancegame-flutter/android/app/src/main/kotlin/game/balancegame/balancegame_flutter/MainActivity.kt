@@ -1,4 +1,4 @@
-package com.example.balacegame_flutter
+package game.balancegame.balancegame_flutter
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,7 +1,7 @@
-import 'package:balacegame_flutter/BalanceGameStart.dart';
-import 'package:balacegame_flutter/GameList1.dart';
-import 'package:balacegame_flutter/StatisticsScreen.dart';
-import 'package:balacegame_flutter/providers/Statistics.dart';
+import 'package:balancegame_flutter/BalanceGameStart.dart';
+import 'package:balancegame_flutter/GameList1.dart';
+import 'package:balancegame_flutter/StatisticsScreen.dart';
+import 'package:balancegame_flutter/providers/statistics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'BalanceGameResult1.dart';

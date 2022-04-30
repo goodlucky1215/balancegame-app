@@ -6,7 +6,6 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
     throw GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
@@ -32,6 +31,7 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
+
 android {
     compileSdkVersion 30
 
@@ -50,7 +50,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "game.balancegame.balacegame_flutter"
+        applicationId "game.balancegame.balancegame_flutter"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
@@ -80,7 +80,6 @@ android {
             }
         }
     }
-
 }
 
 flutter {
@@ -88,5 +87,5 @@ flutter {
 }
 
 dependencies {
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

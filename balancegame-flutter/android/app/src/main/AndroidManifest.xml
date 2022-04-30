@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="game.balancegame.balacegame_flutter">
+    package="game.balancegame.balancegame_flutter">
    <application
-        android:label="심심할땐 밸런스게임"
+       android:label="심심할땐 밸런스게임"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
