@@ -13,11 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (ctx) => Statistics()),
-      ],
-      child: MaterialApp(
+    return MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
@@ -28,7 +24,6 @@ class MyApp extends StatelessWidget {
           //BalanceGameResult.routeName: (context) => BalanceGameResult(), //DB가 있는 경우
           StatisticsScreen.routeName: (context) => StatisticsScreen(),
         },
-      ),
-    );
+      );
   }
 }

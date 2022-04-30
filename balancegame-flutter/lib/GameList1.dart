@@ -1,9 +1,7 @@
-import 'package:balancegame_flutter/api/balanceService.dart';
 import 'package:balancegame_flutter/model/catalogModel.dart';
 import 'package:balancegame_flutter/providers/Statistics.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
 import 'BalanceGameStart.dart';
