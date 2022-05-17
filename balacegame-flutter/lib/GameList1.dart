@@ -1,6 +1,7 @@
 import 'package:balacegame_flutter/api/balanceService.dart';
 import 'package:balacegame_flutter/model/catalogModel.dart';
 import 'package:balacegame_flutter/providers/Statistics.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -35,7 +36,11 @@ class WidgetGameList extends State<GameList1> {
       appBar: AppBar(
         title: Text('밸런스 게임'),
       ),
-      body: Center(child: gameListView(context)),
+      body: Container(
+        child: gameListView(context),
+
+      )
+
     );
   }
 

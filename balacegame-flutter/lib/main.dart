@@ -3,10 +3,18 @@ import 'package:balacegame_flutter/GameList1.dart';
 import 'package:balacegame_flutter/StatisticsScreen.dart';
 import 'package:balacegame_flutter/providers/Statistics.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'BalanceGameResult1.dart';
 
-void main() => runApp(MyApp());
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+
+  runApp(MyApp());
+}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

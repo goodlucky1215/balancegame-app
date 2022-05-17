@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:logger/logger.dart';
 import 'BalanceGameResult1.dart';
 import 'model/catalogModel.dart';
 
 var logger = Logger();
+
+final BannerAd _banner = BannerAd(
+    adUnitId: '',
+    size: AdSize.banner,
+    request: AdRequest(),
+    listener: BannerAdListener(
+      // Called when an ad is successfully received.
+      onAdLoaded: (Ad ad) => print('Ad loaded.'),
+      // Called when an ad request failed.
+      onAdFailedToLoad: (Ad ad, LoadAdError error) {
+        // Dispose the ad here to free resources.
+        ad.dispose();
+        print('Ad failed to load: $error');
+      },
+      // Called when an ad opens an overlay that covers the screen.
+      onAdOpened: (Ad ad) => print('Ad opened.'),
+      // Called when an ad removes an overlay that covers the screen.
+      onAdClosed: (Ad ad) => print('Ad closed.'),
+      // Called when an impression occurs on the ad.
+      onAdImpression: (Ad ad) => print('Ad impression.'),
+    )
+)..load();
 
 class BalanceGameStart extends StatefulWidget {
   static const routeName = '/balaceGameStart';
@@ -15,6 +38,8 @@ class BalanceGameStart extends StatefulWidget {
 }
 
 class GameStart extends State<BalanceGameStart> {
+
+
   int i = 0;
   var check = new List.filled(16, 0, growable: false);
 
@@ -63,6 +88,7 @@ class GameStart extends State<BalanceGameStart> {
         ),
 
       ),
+
           SizedBox(height: 50.0,),
       Row(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -77,6 +103,13 @@ class GameStart extends State<BalanceGameStart> {
           makeButton(catalogId, catalogQuestionLineSplit[i][2], 2, width, () => i++),
         ],
       ),
+          SizedBox(height: 20.0,),
+          Container(
+            alignment: Alignment.bottomCenter,
+            child: AdWidget(ad: _banner,),
+            width: _banner.size.width.toDouble(),
+            height: _banner.size.height.toDouble(),
+          ),
     ]
     )
     );
