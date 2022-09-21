@@ -48,9 +48,8 @@ class GameResult extends State<BalanceGameResult1> {
         onAdLoaded: (ad) {
           ad.fullScreenContentCallback = FullScreenContentCallback(
             onAdDismissedFullScreenContent: (ad) {
-             // Navigator.of(context).pushNamed(GameList1.routeName);
-              //_loadInterstitialAd();
-              Navigator.pop(context);
+              Navigator.popUntil(context,ModalRoute.withName(GameList1.routeName));
+              _loadInterstitialAd();
             },
           );
 
@@ -91,7 +90,7 @@ class GameResult extends State<BalanceGameResult1> {
                     if (_interstitialAd != null) {
                       _interstitialAd?.show();
                     } else {
-                      Navigator.of(context).pushNamed(GameList1.routeName);
+                      Navigator.popUntil(context,ModalRoute.withName(GameList1.routeName));
                     }
                   },
                 ),
@@ -101,12 +100,11 @@ class GameResult extends State<BalanceGameResult1> {
                 color: Theme.of(context).primaryColor,
                 iconSize: 50,
                 onPressed: () {
-                 // if (_interstitialAd != null) {
-                 //   _interstitialAd?.show();
-                //  } else {
-                   // Navigator.of(context).pushNamed(GameList1.routeName);
-                    Navigator.pop(context);
-                //  }
+                  if (_interstitialAd != null) {
+                    _interstitialAd?.show();
+                  } else {
+                    Navigator.popUntil(context,ModalRoute.withName(GameList1.routeName));
+                  }
                 },
               ),
               SizedBox(height: 40.0,),

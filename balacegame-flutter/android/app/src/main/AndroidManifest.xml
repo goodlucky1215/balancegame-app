@@ -40,9 +40,13 @@
             android:value="2" />
 
        <!--테스트 -->
+       <!--meta-data
+           android:name="com.google.android.gms.ads.APPLICATION_ID"
+           android:value="ca-app-pub-3940256099942544~3347511713"/-->
+
+       <!-- real ID-->
        <meta-data
            android:name="com.google.android.gms.ads.APPLICATION_ID"
-           android:value="ca-app-pub-3940256099942544~3347511713 "/>
-
+           android:value="ca-app-pub-6244095830403956~2353659381"/>
     </application>
 </manifest>

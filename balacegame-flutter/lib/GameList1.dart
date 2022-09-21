@@ -19,7 +19,7 @@ class GameList1 extends StatefulWidget {
 
 class WidgetGameList extends State<GameList1> {
   List<CatalogListData> catalogList = <CatalogListData>[];
-  List<String> gameName = ["가벼운 밸런스 게임","웃긴 밸런스 게임","연애 밸런스 게임"];
+  List<String> gameName = ["가벼운 밸런스 게임","웃긴 밸런스 게임","연애 밸런스 게임","음식 밸런스 게임"];
 
   InterstitialAd? _interstitialAd;
 
@@ -33,7 +33,7 @@ class WidgetGameList extends State<GameList1> {
 
     var bundle = DefaultAssetBundle.of(context);
     bundle.loadString('asset/configure.json');
-    for(int i=1;i<=3;i++){
+    for(int i=1;i<=gameName.length;i++){
       catalogList.add(new CatalogListData(catalogName: gameName[i-1], catalogId: i));
     }
   }
